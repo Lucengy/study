@@ -1,0 +1,21 @@
+[
+  {
+    "name": "node1",
+    "host": "192.168.56.101",
+    "user": "ratis",
+    "repoPath": "/home/ratis/src/ratis"
+  },
+  {
+    "name": "node2",
+    "host": "192.168.56.102",
+    "user": "ratis",
+    "repoPath": "/home/ratis/src/ratis"
+  },
+  {
+    "name": "node3",
+    "host": "192.168.56.103",
+    "user": "ratis",
+    "repoPath": "/home/ratis/src/ratis"
+  }
+]
+
