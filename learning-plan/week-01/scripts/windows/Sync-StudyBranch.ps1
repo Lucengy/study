@@ -56,7 +56,7 @@ foreach ($node in $nodes) {
         "cd '$repoPath'"
         "test -d .git"
         'test -z "$(git status --porcelain)"'
-        "git fetch '$RemoteName' '$branch'"
+        "git fetch '$RemoteName'"
         "git checkout '$branch'"
         "git merge --ff-only '$RemoteName/$branch'"
         "git rev-parse --short HEAD"
