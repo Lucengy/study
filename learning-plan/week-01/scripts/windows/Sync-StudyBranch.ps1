@@ -51,15 +51,15 @@ foreach ($node in $nodes) {
     if ($RemoteName -notmatch '^[A-Za-z0-9._-]+$') { throw "Unsafe remote name '$RemoteName'." }
 
     Write-Host "Updating $($node.name) ($target)..."
-    $cleanCheck = 'test -z "$(git -C ''{0}'' status --porcelain)"' -f $repoPath
     $remoteCommand = @(
         "set -e"
-        "test -d '$repoPath/.git'"
-        $cleanCheck
-        "git -C '$repoPath' fetch '$RemoteName' '$branch'"
-        "git -C '$repoPath' checkout '$branch'"
-        "git -C '$repoPath' merge --ff-only '$RemoteName/$branch'"
-        "git -C '$repoPath' rev-parse --short HEAD"
+        "cd '$repoPath'"
+        "test -d .git"
+        'test -z "$(git status --porcelain)"'
+        "git fetch '$RemoteName' '$branch'"
+        "git checkout '$branch'"
+        "git merge --ff-only '$RemoteName/$branch'"
+        "git rev-parse --short HEAD"
     ) -join "; "
     & ssh $target $remoteCommand
     if ($LASTEXITCODE -ne 0) { throw "Update failed on $($node.name). Remaining nodes were not processed." }
