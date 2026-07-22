@@ -37,6 +37,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import org.apache.ratis.server.storage.RaftStorage;
 
 /**
  * Class to start a ratis arithmetic example server.
@@ -75,6 +76,7 @@ public class Server extends SubCommandBase {
         .setServerId(RaftPeerId.valueOf(id))
         .setStateMachine(stateMachine).setProperties(properties)
         .setGroup(raftGroup)
+        .setOption(RaftStorage.StartupOption.RECOVER)
         .build();
     raftServer.start();
 
