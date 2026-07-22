@@ -30,6 +30,8 @@ import org.apache.ratis.proto.RaftProtos.WatchRequestTypeProto;
 import org.apache.ratis.proto.RaftProtos.WriteRequestTypeProto;
 import org.apache.ratis.util.Preconditions;
 import org.apache.ratis.util.ProtoUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -41,6 +43,7 @@ import java.util.Optional;
  * Request from client to server
  */
 public class RaftClientRequest extends RaftClientMessage {
+  private static final Logger LOG = LoggerFactory.getLogger(RaftClientRequest.class);
   private static final Type DATA_STREAM_DEFAULT = new Type(DataStreamRequestTypeProto.getDefaultInstance());
   private static final Type FORWARD_DEFAULT = new Type(ForwardRequestTypeProto.getDefaultInstance());
   private static final Type WATCH_DEFAULT = new Type(
@@ -309,6 +312,12 @@ public class RaftClientRequest extends RaftClientMessage {
     private SpanContextProto spanContext;
 
     public RaftClientRequest build() {
+      LOG.info("Creating RaftClient with clientId {}", clientId);
+      LOG.info("Creating RaftClient with groupId {}", groupId);
+      LOG.info("Creating RaftClient with callId {}", callId);
+      LOG.info("Creating RaftClient with serverId {}", serverId);
+      LOG.info("Creating RaftClient with message {}", message);
+      LOG.info("Creating RaftClient with type {}", type);
       return new RaftClientRequest(this);
     }
 
@@ -439,6 +448,7 @@ public class RaftClientRequest extends RaftClientMessage {
     this.routingTable = b.routingTable;
     this.timeoutMs = b.timeoutMs;
     this.spanContext = b.spanContext;
+
   }
 
   @Override

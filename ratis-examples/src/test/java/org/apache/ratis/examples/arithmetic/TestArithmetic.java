@@ -39,7 +39,8 @@ import static org.apache.ratis.examples.arithmetic.expression.BinaryExpression.O
 import static org.apache.ratis.examples.arithmetic.expression.UnaryExpression.Op.SQRT;
 import static org.apache.ratis.examples.arithmetic.expression.UnaryExpression.Op.SQUARE;
 
-public class TestArithmetic extends ParameterizedBaseTest {
+public class
+TestArithmetic extends ParameterizedBaseTest {
   {
     Slf4jUtils.setLogLevel(ArithmeticStateMachine.LOG, Level.DEBUG);
   }

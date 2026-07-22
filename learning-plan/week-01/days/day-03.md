@@ -12,7 +12,7 @@
 - [ ] 运行 `TestArithmetic`：
 
   ```powershell
-  .\mvnw.cmd -pl ratis-examples -am -DskipTests=false -Dtest=TestArithmetic -Dsurefire.failIfNoSpecifiedTests=false test
+  .\mvnw.cmd -pl ratis-examples -am "-DskipTests=false" "-Dtest=TestArithmetic" "-Dsurefire.failIfNoSpecifiedTests=false" test
   ```
 
 - [ ] 在 `notes/day-03.md` 画出 `Assign -> RaftClient -> 三个 RaftServer -> ArithmeticStateMachine` 组件图，标注“配置”“网络”“持久化”“业务状态”分别归谁负责。
