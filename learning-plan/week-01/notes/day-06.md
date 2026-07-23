@@ -233,22 +233,57 @@ floor(3/2)+1=2
 
 ### 操作前预测
 
-- 恢复节点/id/storage：
-- 是否重新具备多数派：
-- 恢复节点是否会直接成为 Leader：
-- `d` 是否应可读：
-- `e` 是否应成为成功业务状态：
+- 恢复节点/id/storage：192.168.70.110 n0 /home/ratis/data/week-01/arithmetic/n0
+- 是否重新具备多数派：是
+- 恢复节点是否会直接成为 Leader：不会，从follower开始 2026-07-23 07:14:30 INFO  RaftServer$Division:403 - n0@group-6F7570313233: start as a follower, conf=conf: {index: 0, cur=peers:[n0|192.168.70.110:6000, n1|192.168.70.111:6000, n2|192.168.70.112:6000]|listeners:[], old=null}
+- `d` 是否应可读：是
+- `e` 是否应成为成功业务状态：重新执行后成功
 
 ### 实际证据
 
-- 恢复时间：
-- 新/当前 Leader 与 term：
-- 恢复前日志位置：
-- 恢复后日志位置：
+- 恢复时间：07:15:15
+- 新/当前 Leader 与 term：n2/term 24
+- 恢复前日志位置：2026-07-23 07:14:30 INFO  LogSegment:210 - Successfully read 7 entries from segment file /home/ratis/data/week-01/arithmetic/n0/64656d6f-5261-6674-4772-6f7570313233/current/log_inprogress_0
+- 恢复后日志位置：2026-07-23 07:15:15 INFO  SegmentedRaftLogWorker:647 - n0@group-6F7570313233-SegmentedRaftLogWorker: created new log segment /home/ratis/data/week-01/arithmetic/n0/64656d6f-5261-6674-4772-6f7570313233/current/log_inprogress_53
 - 自动追赶证据：
+  2026-07-23 07:15:15 INFO  RaftServer$Division:1748 - n0@group-6F7570313233: Failed appendEntries, previous log entry (t:23, i:52) not found
+  2026-07-23 07:15:15 INFO  RaftServer$Division:1667 - n0@group-6F7570313233: appendEntries* reply n2<-n0#0:FAIL-t24,INCONSISTENCY,nextIndex=7,followerCommit=5,matchIndex=-1
+  2026-07-23 07:15:15 INFO  RaftServer$Division:1748 - n0@group-6F7570313233: Failed appendEntries, previous log entry (t:23, i:52) not found
+  2026-07-23 07:15:15 INFO  RaftServer$Division:1667 - n0@group-6F7570313233: appendEntries* reply n2<-n0#1:FAIL-t24,INCONSISTENCY,nextIndex=7,followerCommit=5,matchIndex=-1
 - `get d` 结果：
+  2026-07-23 07:18:36 INFO  GrpcConfigKeys:62 - raft.grpc.client.worker-group.size = 0 (default)
+  2026-07-23 07:18:36 INFO  RaftClientRequest:315 - Creating RaftClient with clientId client-3538836BC6A3
+  2026-07-23 07:18:36 INFO  RaftClientRequest:316 - Creating RaftClient with groupId group-6F7570313233
+  2026-07-23 07:18:36 INFO  RaftClientRequest:317 - Creating RaftClient with callId 1
+  2026-07-23 07:18:36 INFO  RaftClientRequest:318 - Creating RaftClient with serverId n0
+  2026-07-23 07:18:36 INFO  RaftClientRequest:319 - Creating RaftClient with message Message:d
+  2026-07-23 07:18:36 INFO  RaftClientRequest:320 - Creating RaftClient with type RO
+  2026-07-23 07:18:37 INFO  RaftClientRequest:315 - Creating RaftClient with clientId client-3538836BC6A3
+  2026-07-23 07:18:37 INFO  RaftClientRequest:316 - Creating RaftClient with groupId group-6F7570313233
+  2026-07-23 07:18:37 INFO  RaftClientRequest:317 - Creating RaftClient with callId 1
+  2026-07-23 07:18:37 INFO  RaftClientRequest:318 - Creating RaftClient with serverId n2
+  2026-07-23 07:18:37 INFO  RaftClientRequest:319 - Creating RaftClient with message Message:d
+  2026-07-23 07:18:37 INFO  RaftClientRequest:320 - Creating RaftClient with type RO
+  d=4
+  Thu Jul 23 07:18:37 CST 2026
 - `get e` 结果及解释：
-
+  Thu Jul 23 07:25:12 CST 2026
+  Found /home/ratis/src/ratis/ratis-examples/target/ratis-examples-3.3.0-SNAPSHOT.jar
+  2026-07-23 07:25:14 INFO  GrpcConfigKeys:62 - raft.grpc.client.worker-group.size = 0 (default)
+  2026-07-23 07:25:14 INFO  RaftClientRequest:315 - Creating RaftClient with clientId client-4143A08E540F
+  2026-07-23 07:25:14 INFO  RaftClientRequest:316 - Creating RaftClient with groupId group-6F7570313233
+  2026-07-23 07:25:14 INFO  RaftClientRequest:317 - Creating RaftClient with callId 1
+  2026-07-23 07:25:14 INFO  RaftClientRequest:318 - Creating RaftClient with serverId n0
+  2026-07-23 07:25:14 INFO  RaftClientRequest:319 - Creating RaftClient with message Message:e
+  2026-07-23 07:25:14 INFO  RaftClientRequest:320 - Creating RaftClient with type RO
+  2026-07-23 07:25:15 INFO  RaftClientRequest:315 - Creating RaftClient with clientId client-4143A08E540F
+  2026-07-23 07:25:15 INFO  RaftClientRequest:316 - Creating RaftClient with groupId group-6F7570313233
+  2026-07-23 07:25:15 INFO  RaftClientRequest:317 - Creating RaftClient with callId 1
+  2026-07-23 07:25:15 INFO  RaftClientRequest:318 - Creating RaftClient with serverId n2
+  2026-07-23 07:25:15 INFO  RaftClientRequest:319 - Creating RaftClient with message Message:e
+  2026-07-23 07:25:15 INFO  RaftClientRequest:320 - Creating RaftClient with type RO
+  e=9
+  Thu Jul 23 07:25:15 CST 2026
 ## 6.2 恢复第三台并最终验证
 
 | 节点 | 恢复时间 | term | commitIndex 证据 | appliedIndex 证据 | 追赶方式/证据 |
@@ -265,19 +300,20 @@ floor(3/2)+1=2
 
 1. 为什么必须使用原 id 和原 storage 恢复？
 
-   **我的答案：**
+   为什么使用原id，因为raft ring的配置并没有改变，只有原id才会被认为是同一个raft group成员。
+   为什么使用原storage恢复，这是为了防止storage改变后，节点在恢复时读到其他状态，可能对集群照成损坏
 
 2. 为什么不需要复制 Leader 的 storage？
 
-   **我的答案：**
+   因为raft本身支持通过appendEntries，将集群恢复为正常状态，无需复制leader 的storage
 
 3. 本次是补日志还是安装 snapshot？证据不足时明确记录。
 
-   **我的答案：**
+   补日志，因为leader并没有发生take snapshot，相关的log并没有被purge
 
 4. Client 查询成功为什么不能单独证明三台都追赶完成？
 
-   **我的答案：**
+   Client查询成功，只能证明目前leader存活且健康，并不能证明follower的日志追赶情况
 
 ## 最终事件时间线
 
