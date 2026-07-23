@@ -84,4 +84,12 @@ public class TestAssignCli {
         MINUS.apply(6.0),
         new Assign().createExpression("-6.0"));
   }
+
+  @Test
+  public void invalidException(){
+    final IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        new Assign().createExpression("a++b");
+    });
+    Assertions.assertTrue(e.getMessage().contains("Invalid expression"));
+  }
 }
